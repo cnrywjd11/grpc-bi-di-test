@@ -9,3 +9,11 @@ imports:
 .PHONY: protoc
 protoc:
 	protoc -I=../ ../audio-echo.proto --go_out=plugins=grpc:./
+
+.PHONY: client
+client:
+	go run client.go
+
+.PHONY: server
+server:
+	go run server.go

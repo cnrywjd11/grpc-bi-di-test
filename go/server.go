@@ -36,12 +36,11 @@ const (
 	port = ":50051"
 )
 
-
 type server struct{}
 
 // bi-di RPC
 func (s *server) EchoAudio(stream pb.AudioEcho_EchoAudioServer) error {
-	f, _ := os.Create("../sample-audio/abcd.wav")
+	f, _ := os.Create("../sample-audio/go-server-audio.wav")
 	defer f.Close()
 
 	for {
@@ -54,8 +53,7 @@ func (s *server) EchoAudio(stream pb.AudioEcho_EchoAudioServer) error {
 			return err
 		}
 
-		wbytes, _ := f.Write(chunk.GetData())
-		logger.Printf("write %d bytes in %s file\n", wbytes, f.Name())
+		_, _ = f.Write(chunk.GetData())
 
 		wChunk := &pb.Chunk{Data: chunk.GetData()}
 		if err := stream.Send(wChunk); err != nil {

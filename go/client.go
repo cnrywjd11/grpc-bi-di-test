@@ -90,7 +90,7 @@ func main() {
 }
 
 func asyncClientRecv(streamEcho pb.AudioEcho_EchoAudioClient, c chan struct{}) {
-	f, _ := os.Create("../sample-audio/qwer.wav")
+	f, _ := os.Create("../sample-audio/go-client-audio.wav")
 	defer f.Close()
 
 	for {
@@ -98,8 +98,7 @@ func asyncClientRecv(streamEcho pb.AudioEcho_EchoAudioClient, c chan struct{}) {
 		if errors.Is(err, io.EOF) {
 			break
 		}
-		wbytes, _ := f.Write(chunk.GetData())
-		logger.Printf("write %d bytes in %s file\n", wbytes, f.Name())
+		_, _ = f.Write(chunk.GetData())
 	}
 	<-c
 }
