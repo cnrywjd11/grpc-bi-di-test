@@ -3,6 +3,7 @@ gRPC 양방향 바이너리 통신 예제
 
 client에서 sample-audio/heykakao_hello.wav 파일을 stream 전송하고,<p>
 server는 받은 binary를 echo하는 예제이다.
+
 -----------------------------------------------------------------
 ### python 패키지 설치
 ```shell
